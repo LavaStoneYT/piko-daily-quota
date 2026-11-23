@@ -141,6 +141,15 @@ internal object Groups {
             order = 350,
         )
 
+    val DAILY_QUOTA =
+        SettingsGroupMetadata(
+            id = "newx.timeline.daily_quota",
+            titleResourceName = "piko_newx_group_daily_quota_title",
+            summaryResourceName = "piko_newx_group_daily_quota_summary",
+            iconResourceName = "ic_vector_home_stroke",
+            order = 225,
+        )
+
     val DEBUG_TOOLS =
         SettingsGroupMetadata(
             id = "newx.advanced.debug_tools",

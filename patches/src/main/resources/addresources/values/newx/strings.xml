@@ -499,6 +499,23 @@
 
     <string name="piko_newx_group_translation_title">Translation</string>
     <string name="piko_newx_group_translation_summary">Translate posts with free or custom translators</string>
+    <string name="piko_newx_group_daily_quota_title">Daily post quotas</string>
+    <string name="piko_newx_group_daily_quota_summary">Limit how many posts you can view each day</string>
+    <string name="piko_newx_daily_quota_timeline_title">Timeline daily quota</string>
+    <string name="piko_newx_daily_quota_timeline_summary">Maximum posts per day in For You and Following before the feed ends</string>
+    <string name="piko_newx_daily_quota_search_title">Search daily quota</string>
+    <string name="piko_newx_daily_quota_search_summary">Maximum posts per day in search results before results end</string>
+    <string name="piko_newx_daily_quota_reset_title">Reset today's counters</string>
+    <string name="piko_newx_daily_quota_reset_summary">Start today's quotas from zero again</string>
+    <string name="piko_newx_daily_quota_reset_done">Daily quota counters reset</string>
+    <string name="piko_newx_quota_unlimited">Unlimited</string>
+    <string name="piko_newx_quota_20">20 posts</string>
+    <string name="piko_newx_quota_50">50 posts</string>
+    <string name="piko_newx_quota_100">100 posts</string>
+    <string name="piko_newx_quota_150">150 posts</string>
+    <string name="piko_newx_quota_200">200 posts</string>
+    <string name="piko_newx_quota_300">300 posts</string>
+    <string name="piko_newx_quota_500">500 posts</string>
     <string name="piko_newx_translation_menu_option_title">Translate in post menu</string>
     <string name="piko_newx_translation_menu_option_summary">Adds Translate to the post menu and shows the translation in a tray.</string>
     <string name="piko_newx_translation_force_button_title">Force show translate button</string>

@@ -110,6 +110,7 @@ java "-Xmx${PATCHER_MAX_HEAP_MB}m" -jar "$MORPHE_CLI_JAR" patch \
   -e "NewX: Customize media menu items" \
   -e "NewX: Customize profile tabs" \
   -e "NewX: Restore pinned home tab" \
+  -e "NewX: Daily post quotas" \
   --striplibs=arm64-v8a \
   --force \
   -o "$OUTPUT_APK" \
