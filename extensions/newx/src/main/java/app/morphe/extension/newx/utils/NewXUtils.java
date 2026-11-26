@@ -42,6 +42,7 @@ public final class NewXUtils {
 
         Context applicationContext = context.getApplicationContext();
         if (!(applicationContext instanceof Application application)) return;
+        app.morphe.extension.newx.timeline.DailyQuotaStore.init(application);
 
         application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
