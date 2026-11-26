@@ -1,0 +1,66 @@
+name: Build daily-quota patch bundle (.mpp)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: quota
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Strip non-NewX patches/extensions (mirror piko-newx builder)
+        run: |
+          python3 - <<'PY'
+          import shutil, pathlib
+          root = pathlib.Path(".")
+          for p in [
+            "patches/src/main/kotlin/app/crimera/patches/instagram",
+            "patches/src/main/kotlin/app/crimera/patches/twitter",
+            "patches/src/main/kotlin/app/revanced",
+            "extensions/instagram",
+            "extensions/twitter",
+          ]:
+            d = root / p
+            if d.exists(): shutil.rmtree(d)
+          res = root / "patches/src/main/resources/twitter"
+          if res.exists():
+            for item in res.iterdir():
+              if item.name != "bringbacktwitter":
+                shutil.rmtree(item) if item.is_dir() else item.unlink()
+          add = root / "patches/src/main/resources/addresources"
+          if add.exists():
+            for name in ("instagram", "twitter"):
+              for m in add.glob(f"*/{name}"):
+                if m.is_dir(): shutil.rmtree(m)
+          print("cleanup done")
+          PY
+
+      - name: Build .mpp
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.PKG_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x gradlew
+          ./gradlew buildAndroid --no-daemon --stacktrace \
+            -PnewxResolverReportOnly -PextensionDescriptorReportOnly
+
+      - name: Upload .mpp artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: piko-daily-quota-mpp
+          path: patches/build/libs/*.mpp
+          if-no-files-found: error
