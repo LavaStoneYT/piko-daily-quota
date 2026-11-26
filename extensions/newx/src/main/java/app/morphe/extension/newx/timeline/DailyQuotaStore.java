@@ -3,6 +3,8 @@ package app.morphe.extension.newx.timeline;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.Nullable;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashSet;
@@ -98,4 +100,17 @@ public final class DailyQuotaStore {
         }
         return false;
     }
+
+    private static volatile Context appContext;
+
+    /** Captured once from NewXUtils.initialize so background filters can reach SharedPreferences. */
+    public static void init(Context context) {
+        if (context != null) appContext = context.getApplicationContext();
+    }
+
+    @Nullable
+    public static Context context() {
+        return appContext;
+    }
+
 }
