@@ -178,20 +178,8 @@ public final class NewXTimelineFilter {
             }
         }
 
-        return filterTimelineItems(
-                timelineItems,
-                filterPromotedItems,
-                hideWhoToFollow,
-                ruleSnapshot,
-                aiSourcesToHide,
-                hideDiscoverMore,
-                verifiedTypesToHide,
-                whitelist,
-                filterTimeline,
-                filterThread,
-                PRODUCTION_MODEL_ACCESS,
-                RESULT_MEMO
-        );
+        Object filtered = filterTimelineItems(timelineItems, filterPromotedItems, hideWhoToFollow, ruleSnapshot, aiSourcesToHide, hideDiscoverMore, verifiedTypesToHide, whitelist, filterTimeline, filterThread, PRODUCTION_MODEL_ACCESS, RESULT_MEMO);
+        return DailyQuotaFilter.applyQuota(filtered);
     }
 
     private static boolean readBooleanSetting(String key, boolean defaultValue) {
@@ -1411,15 +1399,15 @@ private static Object filterTimelineItems(
         return null;
     }
 
-    private static boolean isTimelineModuleItem(Object value) {
+    static boolean isTimelineModuleItem(Object value) {
         return false;
     }
 
-    private static boolean isTimelinePost(Object value) {
+    static boolean isTimelinePost(Object value) {
         return false;
     }
 
-    private static boolean isTimelineModule(Object value) {
+    static boolean isTimelineModule(Object value) {
         return false;
     }
 
@@ -1427,7 +1415,7 @@ private static Object filterTimelineItems(
         return false;
     }
 
-    private static Object getModuleItem(Object wrapper) {
+    static Object getModuleItem(Object wrapper) {
         return null;
     }
 
@@ -1459,7 +1447,7 @@ private static Object filterTimelineItems(
         return 0L;
     }
 
-    private static String getModuleEntryId(Object module) {
+    static String getModuleEntryId(Object module) {
         return null;
     }
 
@@ -1467,7 +1455,7 @@ private static Object filterTimelineItems(
         return null;
     }
 
-    private static String getPostEntryId(Object post) {
+    static String getPostEntryId(Object post) {
         return null;
     }
 
@@ -1492,7 +1480,7 @@ private static Object filterTimelineItems(
                 : component.toLowerCase(Locale.ROOT).contains("promoted");
     }
 
-    private static Object getPostId(Object post) {
+    static Object getPostId(Object post) {
         return null;
     }
 
@@ -1560,7 +1548,7 @@ private static Object filterTimelineItems(
      * The timeline adapter replaces this body with NewX's immutable-list converter at patch time.
      * Keep a Java-list fallback so host-side filtering tests can run without a patched APK.
      */
-    private static Object immutableList(List<Object> filtered) {
+    static Object immutableList(List<Object> filtered) {
         return Collections.unmodifiableList(filtered);
     }
 
