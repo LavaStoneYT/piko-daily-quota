@@ -507,4 +507,10 @@
     <string name="piko_newx_translation_inline_summary">X\'s inline translate button uses your selected translator instead of Grok. FxTwitter falls back to Google here.</string>
     <string name="piko_newx_translation_translator_title">Translator</string>
     <string name="piko_newx_translation_translator_summary">Choose a free or custom translator and the target language</string>
+    <string name="piko_newx_daily_quota_home_title">Daily post limit — For You &amp; Following</string>
+    <string name="piko_newx_daily_quota_home_summary">Maximum posts shown per day in For You and Following. 0 disables. Resets at local midnight.</string>
+    <string name="piko_newx_daily_quota_search_title">Daily post limit — Search</string>
+    <string name="piko_newx_daily_quota_search_summary">Maximum posts shown per day in Search results. 0 disables. Resets at local midnight.</string>
+    <string name="piko_newx_daily_quota_invalid">Enter a whole number between 0 and 100000 (0 disables).</string>
+    <string name="piko_newx_daily_quota_end">You\'ve reached the end</string>
 </resources>
