@@ -1,0 +1,25 @@
+name: Publish quota .mpp release
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download built .mpp artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh run download 45770938371 --repo "$GITHUB_REPOSITORY" -n piko-daily-quota-mpp -D dist
+      - name: Create release with .mpp
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          MPP=$(ls dist/*.mpp | head -n1)
+          cp "$MPP" dist/piko-daily-quota-3.75.0.mpp
+          gh release create v3.75.0-quota.1 dist/piko-daily-quota-3.75.0.mpp \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Piko daily post quotas — X 12.41.0 (NewX)" \
+            --notes "Built from piko x-lite @86fb221 (= piko-newx v3.75.0, X 12.41.0-prod.01). Adds user-configurable daily post quotas for For You/Following and Search. See DAILY_QUOTA_DESIGN.md for implemented scope and verification status."
